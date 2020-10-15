@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "import": "node app/import.js",
+    "analyse": "node app/analyse.js",
+    "reset": "node app/reset.js"
   },
   "author": "",
   "license": "ISC",
