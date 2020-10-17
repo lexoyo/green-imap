@@ -3,14 +3,13 @@ const {health, isUp, store, init, reset} = require('./es')
 const {NUM_EMAILS, ES_INDEX, CLEAR_BEFORE_IMPORT} = require('./constants')
 
 async function app() {
-  //console.log(await health())
   let idx = 0
   const ok = await isUp()
   if(ok) {
     if(CLEAR_BEFORE_IMPORT) await reset(ES_INDEX)
     await init(ES_INDEX)
     await fetchMail(NUM_EMAILS, async message => {
-      await store(ES_INDEX, message.uid, message)
+      await store(ES_INDEX, message.uid, message, 'test2')
       console.log('MESSAGE', idx++, message.subject)
     })
 

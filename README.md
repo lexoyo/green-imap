@@ -6,6 +6,10 @@ Compatible with all email providers (use Imap protocol)
 
 ![Green Imap Tool (GreenIT)](./screenshot.png)
 
+Known issues:
+
+* there is a memory leak in import emails to elastic
+
 ## Road map
 
 ### v1
@@ -25,7 +29,7 @@ Features
 * [ ] A clean CLI app to load ES and IMAP settings and import emails
 * [ ] Deploy on npm
 
-Bonus: compare email providers speed
+This makes it easy to compare email providers speed
 
 * [ ] Gandi
 * [ ] OVH
@@ -91,4 +95,13 @@ Succes: 500932 emails imported in 23 min
 You can the visualize your emails in kibana
 
 1. open http://localhost:5601/ in a browser
-2. setup index pattern: 
+2. setup index pattern: `emails*`
+3. go to dashboard and create vizualisations
+
+SaaS mode:
+
+* create a role for the registered users with the right space and dashboard
+* give registered users rights to see only their data (requires platinium elasticsearch lisense), set Granted documents query to:
+```
+{"template":{"source":{"term":{"owner":"{{_user.username}}"}}}}
+```

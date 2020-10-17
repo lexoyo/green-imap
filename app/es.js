@@ -1,5 +1,7 @@
 const { Client } = require('@elastic/elasticsearch')
-const client = new Client({ node: 'http://localhost:9200' })
+
+if(!process.env.ELASTIC_ENDPOINT) throw new Error('Env var ELASTIC_ENDPOINT is required')
+const client = new Client({ node: process.env.ELASTIC_ENDPOINT })
 
 exports.health = async function() {
   return client.cluster.health()
@@ -69,12 +71,15 @@ exports.init = async function(index) {
   return Promise.resolve()
 }
 
-exports.store = async function(index, id, body) {
+exports.store = async function(index, id, body, owner) {
   //console.log('store', {index, id, body})
   await client.index({
     index,
     id,
-    body,
+    body: {
+      ...body,
+      owner,
+    },
   })
 }
 
@@ -169,3 +174,48 @@ exports.aggregated = async function(index, filterOutSeen) {
   return result.body.aggregations//.hits.hits.map(h => h._source)
   //return result.body.hits.hits.map(h => h._source)
 }
+
+// add a key value to all documents source
+exports.addField = async function(index, name, value) {
+  return await client.updateByQuery({
+    index,
+    body: {
+    script : `ctx._source.${name} = '${value}'`,
+    },
+  })
+}
+
+exports.createRole = async function(index, name, term) {
+  return await client.security.putRole({
+    name,
+    body: {
+      
+          indices: [
+            {
+            names: [index],
+            "privileges" : [ "read" ],
+            query: {
+              template: {
+                source: {
+                  term,
+                }
+              }
+            }
+            }
+          ]
+    }
+  })
+}
+
+exports.createUser = async function(index, username, email, name) {
+  return await client.security.putUser({
+    username,
+    body: {
+      password: 'testtest',
+      roles: ['registered_user'],
+      full_name: name,
+      email,
+    },
+  })
+}
+
