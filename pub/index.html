@@ -1,0 +1,48 @@
+<script>
+  // function getToken(username, password) {
+  //     console.log('getToken', {password, username})
+  //     const baseUrl = ''
+  //     const path = '/api/login'
+  //     const url = baseUrl + path
+  //     const data = {
+  //         username,
+  //         password,
+  //       }
+  //     return fetch(url, {
+  //         method: 'POST',
+  //         cache: 'no-cache',
+  //         headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //         body: JSON.stringify(data),
+  //       })
+  //       .then(response => response.json())
+  //   }
+  //   function setCookie(token) {
+  //       console.log('setCookie', {token})
+  //       const baseUrl = 'https://121c3d2c788d4f4296e96aca4b1c56ce.europe-west1.gcp.cloud.es.io:9243'
+  //       const path = ''
+  //       const url = baseUrl + path
+  //       return fetch(url, {
+  //           method: 'POST',
+  //           cache: 'no-cache',
+  //           headers: {
+  //               'Content-Type': 'application/json',
+  //               'Authorization': 'Bearer ' + token,
+  //             },
+  //         })
+  //         .then(response => response.json())
+
+  //     }
+  //   getToken('test', 'testtest')
+  //     .then(data => {
+  //         console.log({data})
+  //         setCookie(data.access_token)
+  //           .then(res => {
+  //               console.log({res})
+  //               document.querySelector('iframe')
+  //               .src = 'https://121c3d2c788d4f4296e96aca4b1c56ce.europe-west1.gcp.cloud.es.io:9243/app/dashboards#/view/aa4ef420-10b8-11eb-90d4-bd155275ebe6?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-17y%2Cto%3Anow))&show-time-filter=true'
+  //             })
+  //       })
+</script>
+<iframe src="/es/app/dashboards#/view/aa4ef420-10b8-11eb-90d4-bd155275ebe6?embed=true&_g=(filters%3A!()%2CrefreshInterval%3A(pause%3A!t%2Cvalue%3A0)%2Ctime%3A(from%3Anow-17y%2Cto%3Anow))&show-time-filter=true" height="600" width="800"></iframe>
