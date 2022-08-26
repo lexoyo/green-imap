@@ -1,6 +1,6 @@
 # Green Imap Tool (GreenIT)
 
-Understand your emails and take actions
+Understand your emails and take actions. Get rid of useless mail and backup the relevant ones.
 
 Compatible with all email providers (use Imap protocol)
 
